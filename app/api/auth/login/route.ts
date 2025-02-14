@@ -56,9 +56,6 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: false, error: "Invalid credentials" }, { status: 401 });
         }
 
-        // JWT expiration (default: 7 days)
-        const expiresIn = process.env.JWT_EXPIRES_IN ? parseInt(process.env.JWT_EXPIRES_IN) : "7d";
-
         // Generate JWT
         const token = jwt.sign(
             {
@@ -66,7 +63,7 @@ export async function POST(req: Request) {
                 email: user.email
             },
             process.env.JWT_SECRET as string,
-            { expiresIn }
+            // { expiresIn: "7h" }
         );
 
         // Remove password from user object before sending

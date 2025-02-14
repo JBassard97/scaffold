@@ -8,21 +8,29 @@ export function verifyToken(token: string) {
     }
 }
 
-// Function to decode and check token validity
-export function isLoggedIn(token: string): boolean {
-    try {
-        const decoded = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
-        const exp = decoded?.exp; // Get expiration time from the payload
+// ! Opting out of expiring tokens for now
+// export function isLoggedIn(token: string): boolean {
+//     try {
+//         if (!token || token.split(".").length !== 3) {
+//             console.error("Invalid token format");
+//             return false;
+//         }
 
-        // If token expired or there's no expiration, return false
-        if (!exp || Date.now() >= exp * 1000) {
-            return false;
-        }
+//         const base64Url = token.split(".")[1];
+//         const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/"); // Ensure proper Base64 format
+//         const decoded = JSON.parse(atob(base64)); // Decode JWT payload safely
+//         const exp = decoded?.exp; // Get expiration time from payload
 
-        return true;
-    } catch (err) {
-        console.error("Invalid token", err);
-        return false;
-    }
-}
+//         if (!exp || Date.now() >= exp * 1000) {
+//             console.error("Token expired");
+//             return false;
+//         }
+
+//         return true;
+//     } catch (err) {
+//         console.error("Invalid token", err);
+//         return false;
+//     }
+// }
+
 

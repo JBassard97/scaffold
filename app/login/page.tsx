@@ -41,8 +41,8 @@ export default function LoginPage() {
       // Store user data if needed
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // Redirect to /
-      router.push("/");
+      // Redirect to /profile
+      router.push("/profile");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to login");
     } finally {

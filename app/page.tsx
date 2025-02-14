@@ -3,7 +3,7 @@
 "use client";
 
 import Link from "next/link";
-import { isLoggedIn } from "../lib/auth";
+// import { isLoggedIn } from "../lib/auth";
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
@@ -40,6 +40,7 @@ export default function HomePage() {
         <>
           <h1>Logged In</h1>
           <button onClick={handleLogout}>Logout</button>
+          <Link href="/profile">Profile</Link>
         </>
       ) : (
         <div>

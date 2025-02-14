@@ -43,7 +43,7 @@ export default function RegisterPage() {
       localStorage.setItem("loggedIn", "true");
 
       // Redirect to home page
-      router.push("/");
+      router.push("/profile");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Registration failed");
     } finally {
