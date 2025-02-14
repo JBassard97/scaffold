@@ -19,7 +19,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/users", {
+      const res = await fetch("/api/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

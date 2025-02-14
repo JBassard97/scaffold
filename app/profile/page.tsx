@@ -4,14 +4,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation"; // Correct way to use routing
 import { useState, useEffect } from "react";
 import formatDate from "@/lib/formatDate";
-
-interface User {
-  username: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-  // Add other properties if needed
-}
+import { User } from "@/types";
+import { ChangeUsernameForm } from "../components/ChangeUsernameForm/ChangeUsernameForm";
+import { ChangeEmailForm } from "../components/ChangeEmailForm/ChangeEmailForm";
+import { ChangePasswordForm } from "../components/ChangePasswordForm/ChangePasswordForm";
 
 export default function HomePage() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -40,10 +36,17 @@ export default function HomePage() {
     <div>
       {userData && (
         <div>
-          <h1>{userData.username}'s Profile</h1>
-          <h2>{userData.email}</h2>
+          <h2>Your Profile</h2>
+          <h3>Username: {userData.username}</h3>
+          <ChangeUsernameForm _id={userData._id} setUserData={setUserData} />
+          <h3>Email: {userData.email}</h3>
+          <ChangeEmailForm _id={userData._id} setUserData={setUserData} />
+          <h3>Password: ********</h3>
+          <ChangePasswordForm _id={userData._id} />
           <h3>Joined On: {formatDate(userData.createdAt)}</h3>
-          {userData.createdAt !== userData.updatedAt && (<h3>Profile Updated On: {formatDate(userData.updatedAt)}</h3>)}
+          {userData.createdAt !== userData.updatedAt && (
+            <h3>Profile Updated On: {formatDate(userData.updatedAt)}</h3>
+          )}
         </div>
       )}
     </div>

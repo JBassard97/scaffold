@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import connectToDatabase from "../../../lib/mongo";
-import User from "../../../models/User";
+import connectToDatabase from "@/lib/mongo";
+import User from "@/models/User";
 
 // ! Create User
 export async function POST(req: Request) {
