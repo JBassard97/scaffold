@@ -55,7 +55,7 @@ export default function Profile() {
               localStorage.removeItem("token");
               localStorage.removeItem("user");
               setLoggedIn(false);
-              router.push("/"); // Redirect to home page after successful deletion
+              window.location.href = "/"; // Redirect to home page after successful deletion
             }}
           />
         </div>
