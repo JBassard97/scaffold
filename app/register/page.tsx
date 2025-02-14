@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -43,7 +44,8 @@ export default function RegisterPage() {
       localStorage.setItem("loggedIn", "true");
 
       // Redirect to home page
-      router.push("/profile");
+      // router.push("/profile");
+      window.location.href = "/profile";
     } catch (err) {
       setError(err instanceof Error ? err.message : "Registration failed");
     } finally {
@@ -105,6 +107,7 @@ export default function RegisterPage() {
           <button type="submit" disabled={loading}>
             {loading ? "Registering..." : "Register"}
           </button>
+          <Link href="/login">Already have an account? Login!</Link>
         </form>
       </div>
     </div>

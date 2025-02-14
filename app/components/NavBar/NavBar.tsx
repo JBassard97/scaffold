@@ -23,6 +23,7 @@ export default function NavBar() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setLoggedIn(false);
+    window.location.href = "/"; // Redirect to home page after logout";
   };
 
   return (
