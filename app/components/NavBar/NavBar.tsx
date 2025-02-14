@@ -28,9 +28,9 @@ export default function NavBar() {
   return (
     <nav>
       <ul>
-        <li>
+        {/* <li>
           <Link href="/">Home</Link>
-        </li>
+        </li> */}
         {loggedIn ? (
           <>
             <li>

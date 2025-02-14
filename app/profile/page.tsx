@@ -8,8 +8,9 @@ import { User } from "@/types";
 import { ChangeUsernameForm } from "../components/ChangeUsernameForm/ChangeUsernameForm";
 import { ChangeEmailForm } from "../components/ChangeEmailForm/ChangeEmailForm";
 import { ChangePasswordForm } from "../components/ChangePasswordForm/ChangePasswordForm";
+import { DeleteAccountButton } from "../components/DeleteAccountButton/DeleteAccountButton";
 
-export default function HomePage() {
+export default function Profile() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState<User | null>(null);
   const router = useRouter(); // Use useRouter hook
@@ -47,6 +48,16 @@ export default function HomePage() {
           {userData.createdAt !== userData.updatedAt && (
             <h3>Profile Updated On: {formatDate(userData.updatedAt)}</h3>
           )}
+          <DeleteAccountButton
+            userId={userData._id}
+            onDeleteSuccess={() => {
+              localStorage.setItem("loggedIn", "false");
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              setLoggedIn(false);
+              router.push("/"); // Redirect to home page after successful deletion
+            }}
+          />
         </div>
       )}
     </div>
