@@ -1,0 +1,59 @@
+Questionnaire-Plan (Question Tree)
+
+### What would you like to build?
+
+- Frontend
+  - Use a framework
+    - React
+      - JavaScript
+      - TypeScript
+    - Svelte
+      - JavaScript
+      - TypeScript
+    - Vue
+      - JavaScript
+      - TypeScript
+  - Static website with HTML,CSS,JS
+    - JavaScript
+    - TypeScript
+- Backend
+  - JavaScript
+    - Use a framework
+      - Express
+    - Implement with base language
+  - TypeScript
+    - Use a framework
+      - Express
+    - Implement with base language
+  - Python
+    - Use a framework
+      - Flask
+      - Django
+      - Fast API
+    - Implement with base language
+  - Java
+    - Use a framework
+      - Spring Boot (with Maven)
+    - Implement with base language
+- Full Stack
+  - Use a full stack framework
+    - Next.js
+    - SvelteKit
+    - Laravel
+  - Use separate front/backend technologies
+    - JavaScript
+        - React
+        - Vue
+        - Vanilla
+    - TypeScript
+        - React
+        - Vue
+        - Vanilla
+    - Python
+        - React
+        - Vue
+        - Vanilla
+    - Java
+        - React
+        - Vue
+        - Vanilla

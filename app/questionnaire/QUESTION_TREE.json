@@ -1,0 +1,109 @@
+{
+  "start": {
+    "question": "What would you like to build?",
+    "options": [
+      { "label": "Frontend", "value": "frontend", "next": "frontend" },
+      { "label": "Backend", "value": "backend", "next": "backend" },
+      { "label": "Full Stack", "value": "full-stack", "next": "full-stack" }
+    ]
+  },
+  "frontend": {
+    "question": "Would you like to use a framework?",
+    "options": [
+      { "label": "React", "value": "react", "next": "frontend-language" },
+      { "label": "Svelte", "value": "svelte", "next": "frontend-language" },
+      { "label": "Vue", "value": "vue", "next": "frontend-language" },
+      {
+        "label": "Static website (HTML, CSS, JS)",
+        "value": "static",
+        "next": "frontend-language"
+      }
+    ]
+  },
+  "frontend-language": {
+    "question": "What language would you like to use?",
+    "options": [
+      { "label": "JavaScript", "value": "javascript", "next": "done" },
+      { "label": "TypeScript", "value": "typescript", "next": "done" }
+    ]
+  },
+  "backend": {
+    "question": "What backend language would you like to use?",
+    "options": [
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "next": "backend-framework"
+      },
+      { "label": "Python", "value": "python", "next": "python-framework" },
+      { "label": "Java", "value": "java", "next": "java-framework" }
+    ]
+  },
+  "backend-framework": {
+    "question": "Would you like to use a framework?",
+    "options": [
+      { "label": "Express", "value": "express", "next": "done" },
+      { "label": "None (Base language)", "value": "vanilla", "next": "done" }
+    ]
+  },
+  "python-framework": {
+    "question": "Which framework would you like to use?",
+    "options": [
+      { "label": "Flask", "value": "flask", "next": "done" },
+      { "label": "Django", "value": "django", "next": "done" },
+      { "label": "FastAPI", "value": "fastapi", "next": "done" }
+    ]
+  },
+  "java-framework": {
+    "question": "Which framework would you like to use?",
+    "options": [
+      {
+        "label": "Spring Boot (with Maven)",
+        "value": "spring-boot",
+        "next": "done"
+      },
+      { "label": "None (Base language)", "value": "vanilla", "next": "done" }
+    ]
+  },
+  "full-stack": {
+    "question": "Would you like to use a full-stack framework?",
+    "options": [
+      { "label": "Next.js", "value": "next", "next": "done" },
+      { "label": "SvelteKit", "value": "sveltekit", "next": "done" },
+      { "label": "Laravel", "value": "laravel", "next": "done" },
+      {
+        "label": "No, separate frontend & backend",
+        "value": "separate",
+        "next": "full-stack-separate"
+      }
+    ]
+  },
+  "full-stack-separate": {
+    "question": "What frontend technology would you like to use?",
+    "options": [
+      {
+        "label": "React",
+        "value": "react",
+        "next": "full-stack-separate-backend"
+      },
+      { "label": "Vue", "value": "vue", "next": "full-stack-separate-backend" },
+      {
+        "label": "Vanilla JavaScript",
+        "value": "vanilla",
+        "next": "full-stack-separate-backend"
+      }
+    ]
+  },
+  "full-stack-separate-backend": {
+    "question": "What backend technology would you like to use?",
+    "options": [
+      { "label": "Express (JavaScript)", "value": "express", "next": "done" },
+      { "label": "Flask (Python)", "value": "flask", "next": "done" },
+      { "label": "Spring Boot (Java)", "value": "spring-boot", "next": "done" }
+    ]
+  },
+  "done": {
+    "question": "You're all set! Generating your project...",
+    "options": []
+  }
+}

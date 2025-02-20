@@ -56,8 +56,8 @@ export const DeleteAccountButton = ({
           : `Press ${5 - pressCount} Times to Delete Account`}
       </button>
       <p>
-        * Deleting your account results in the loss of all of your personal data
-        and access to paid membership features.
+        Deleting your account results in the loss of all personal data and
+        access to paid membership features.
       </p>
 
       {error && <p>{error}</p>}

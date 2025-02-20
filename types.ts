@@ -8,3 +8,20 @@ export interface User {
     updatedAt: string;
     // Add other fields as necessary
 }
+
+export type QuestionKey = string;
+
+export interface QuestionOption {
+    label: string;
+    value: string;
+    next: QuestionKey;
+}
+
+export interface QuestionNode {
+    question: string;
+    options: QuestionOption[];
+}
+
+export interface QuestionTree {
+    [key: QuestionKey]: QuestionNode;
+}
