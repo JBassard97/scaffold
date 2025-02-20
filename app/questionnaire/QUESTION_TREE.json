@@ -100,7 +100,7 @@
       {
         "label": "Yes",
         "value": "framework",
-        "next": "full-stack-frontend-language"
+        "next": "full-stack-framework"
       },
       {
         "label": "No",
@@ -109,9 +109,24 @@
       }
     ]
   },
+  "full-stack-framework": {
+    "question": "Which full-stack framework would you like to use?",
+    "options": [
+      {
+        "label": "Next",
+        "value": "next",
+        "next": "full-stack-frontend-language"
+      },
+      {
+        "label": "Laravel",
+        "value": "laravel",
+        "next": "full-stack-frontend-language"
+      }
+    ]
+  },
 
   "full-stack-frontend-language": {
-    "question": "Which frontend language would you like to use?",
+    "question": "Which frontend language would you like to use in your full-stack project?",
     "options": [
       { "label": "JavaScript", "value": "javascript", "next": "done" },
       { "label": "TypeScript", "value": "typescript", "next": "done" }
