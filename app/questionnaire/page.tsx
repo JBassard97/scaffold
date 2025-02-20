@@ -35,7 +35,7 @@ const QuestionnairePage = () => {
 
   return (
     <div>
-      <h1>Project Questionnaire</h1>
+      <h4>Project Questionnaire</h4>
       <QuestionnaireForm
         questionTree={questionTree}
         currentQuestionKey={currentQuestionKey}
