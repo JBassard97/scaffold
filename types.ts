@@ -20,6 +20,7 @@ export interface QuestionOption {
 export interface QuestionNode {
     question: string;
     options: QuestionOption[];
+    previous?: QuestionKey;
 }
 
 export interface QuestionTree {

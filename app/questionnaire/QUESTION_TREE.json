@@ -13,27 +13,28 @@
     "options": [
       { "label": "Yes", "value": "framework", "next": "frontend-framework" },
       { "label": "No", "value": "vanilla", "next": "frontend-language" }
-    ]
+    ],
+    "previous": "start"
   },
+
   "frontend-framework": {
     "question": "Which frontend framework would you like to use?",
     "options": [
       { "label": "React", "value": "react", "next": "frontend-language" },
       { "label": "Svelte", "value": "svelte", "next": "frontend-language" },
       { "label": "Vue", "value": "vue", "next": "frontend-language" },
-      {
-        "label": "Vanilla",
-        "value": "static",
-        "next": "frontend-language"
-      }
-    ]
+      { "label": "Vanilla", "value": "static", "next": "frontend-language" }
+    ],
+    "previous": "frontend"
   },
+
   "frontend-language": {
     "question": "Which frontend language would you like to use?",
     "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "done" },
-      { "label": "TypeScript", "value": "typescript", "next": "done" }
-    ]
+      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
+      { "label": "TypeScript", "value": "typescript", "next": "project-name" }
+    ],
+    "previous": "frontend-framework"
   },
 
   "backend": {
@@ -45,16 +46,18 @@
         "next": "backend-framework-language"
       },
       { "label": "No", "value": "vanilla", "next": "backend-language" }
-    ]
+    ],
+    "previous": "start"
   },
 
   "backend-language": {
     "question": "Which backend language would you like to use?",
     "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "done" },
-      { "label": "Python", "value": "python", "next": "done" },
-      { "label": "Java", "value": "java", "next": "done" }
-    ]
+      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
+      { "label": "Python", "value": "python", "next": "project-name" },
+      { "label": "Java", "value": "java", "next": "project-name" }
+    ],
+    "previous": "backend"
   },
 
   "backend-framework-language": {
@@ -67,48 +70,53 @@
       },
       { "label": "Python", "value": "python", "next": "python-framework" },
       { "label": "Java", "value": "java", "next": "java-framework" }
-    ]
+    ],
+    "previous": "backend"
   },
 
   "javascript-framework": {
     "question": "Which JavaScript backend framework would you like to use?",
-    "options": [{ "label": "Express", "value": "express", "next": "done" }]
+    "options": [
+      { "label": "Express", "value": "express", "next": "project-name" }
+    ],
+    "previous": "backend-framework-language"
   },
+
   "python-framework": {
     "question": "Which Python backend framework would you like to use?",
     "options": [
-      { "label": "Flask", "value": "flask", "next": "done" },
-      { "label": "Django", "value": "django", "next": "done" },
-      { "label": "FastAPI", "value": "fastapi", "next": "done" }
-    ]
+      { "label": "Flask", "value": "flask", "next": "project-name" },
+      { "label": "Django", "value": "django", "next": "project-name" },
+      { "label": "FastAPI", "value": "fastapi", "next": "project-name" }
+    ],
+    "previous": "backend-framework-language"
   },
+
   "java-framework": {
     "question": "Which Java backend framework would you like to use?",
     "options": [
       {
         "label": "Spring Boot (with Maven)",
         "value": "spring-boot",
-        "next": "done"
-      },
-      { "label": "None (Base language)", "value": "vanilla", "next": "done" }
-    ]
+        "next": "project-name"
+      }
+    ],
+    "previous": "backend-framework-language"
   },
 
   "full-stack": {
     "question": "Would you like to use a full-stack framework?",
     "options": [
-      {
-        "label": "Yes",
-        "value": "framework",
-        "next": "full-stack-framework"
-      },
+      { "label": "Yes", "value": "framework", "next": "full-stack-framework" },
       {
         "label": "No",
         "value": "separate",
         "next": "full-stack-separate-frontend"
       }
-    ]
+    ],
+    "previous": "start"
   },
+
   "full-stack-framework": {
     "question": "Which full-stack framework would you like to use?",
     "options": [
@@ -122,19 +130,21 @@
         "value": "laravel",
         "next": "full-stack-frontend-language"
       }
-    ]
+    ],
+    "previous": "full-stack"
   },
 
   "full-stack-frontend-language": {
     "question": "Which frontend language would you like to use in your full-stack project?",
     "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "done" },
-      { "label": "TypeScript", "value": "typescript", "next": "done" }
-    ]
+      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
+      { "label": "TypeScript", "value": "typescript", "next": "project-name" }
+    ],
+    "previous": "full-stack-framework"
   },
 
   "full-stack-separate-frontend": {
-    "question": "Would you like to use a frontend framework?",
+    "question": "Would you like to use a frontend framework in your full-stack project?",
     "options": [
       {
         "label": "Yes",
@@ -146,7 +156,8 @@
         "value": "vanilla",
         "next": "full-stack-separate-frontend-language"
       }
-    ]
+    ],
+    "previous": "full-stack"
   },
 
   "full-stack-separate-frontend-framework": {
@@ -167,7 +178,8 @@
         "value": "vanilla",
         "next": "full-stack-separate-frontend-language"
       }
-    ]
+    ],
+    "previous": "full-stack-separate-frontend"
   },
 
   "full-stack-separate-frontend-language": {
@@ -183,8 +195,10 @@
         "value": "typescript",
         "next": "full-stack-separate-backend"
       }
-    ]
+    ],
+    "previous": "full-stack-separate-frontend-framework"
   },
+
   "full-stack-separate-backend": {
     "question": "Would you like to use a backend framework in your full-stack project?",
     "options": [
@@ -198,16 +212,20 @@
         "value": "vanilla",
         "next": "full-stack-separate-backend-language"
       }
-    ]
+    ],
+    "previous": "full-stack-separate-frontend-language"
   },
+
   "full-stack-separate-backend-language": {
     "question": "Which backend language would you like to use?",
     "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "done" },
-      { "label": "Python", "value": "python", "next": "done" },
-      { "label": "Java", "value": "java", "next": "done" }
-    ]
+      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
+      { "label": "Python", "value": "python", "next": "project-name" },
+      { "label": "Java", "value": "java", "next": "project-name" }
+    ],
+    "previous": "full-stack-separate-backend"
   },
+
   "full-stack-separate-backend-framework-language": {
     "question": "Which backend language would you like to use?",
     "options": [
@@ -226,33 +244,47 @@
         "value": "java",
         "next": "full-stack-separate-backend-java-framework"
       }
-    ]
+    ],
+    "previous": "full-stack-separate-backend"
   },
+
   "full-stack-separate-backend-javascript-framework": {
     "question": "Which JavaScript backend framework would you like to use?",
-    "options": [{ "label": "Express", "value": "express", "next": "done" }]
+    "options": [
+      { "label": "Express", "value": "express", "next": "project-name" }
+    ],
+    "previous": "full-stack-separate-backend-framework-language"
   },
+
   "full-stack-separate-backend-python-framework": {
     "question": "Which Python backend framework would you like to use?",
     "options": [
-      { "label": "Flask", "value": "flask", "next": "done" },
-      { "label": "Django", "value": "django", "next": "done" },
-      { "label": "FastAPI", "value": "fastapi", "next": "done" }
-    ]
+      { "label": "Flask", "value": "flask", "next": "project-name" },
+      { "label": "Django", "value": "django", "next": "project-name" },
+      { "label": "FastAPI", "value": "fastapi", "next": "project-name" }
+    ],
+    "previous": "full-stack-separate-backend-framework-language"
   },
+
   "full-stack-separate-backend-java-framework": {
     "question": "Which Java backend framework would you like to use?",
     "options": [
       {
         "label": "Spring Boot (with Maven)",
         "value": "spring-boot",
-        "next": "done"
+        "next": "project-name"
       }
-    ]
+    ],
+    "previous": "full-stack-separate-backend-framework-language"
   },
 
+  "project-name": {
+    "question": "What would you like to name your project?",
+    "options": [],
+    "next": "done"
+  },
   "done": {
-    "question": "You're all set! Generating your project...",
+    "question": "Generating your project...",
     "options": []
   }
 }

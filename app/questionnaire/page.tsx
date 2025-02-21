@@ -3,6 +3,7 @@
 import { useState } from "react";
 import QUESTION_TREE from "./QUESTION_TREE.json";
 import QuestionnaireForm from "../components/QuestionnaireForm/QuestionnaireForm";
+import { TagDisplay } from "../components/TagDisplay/TagDisplay";
 import { QuestionKey, QuestionTree } from "@/types";
 
 const QuestionnairePage = () => {
@@ -33,9 +34,42 @@ const QuestionnairePage = () => {
     setCurrentQuestionKey(nextKey);
   };
 
+  const handlePreviousQuestion = () => {
+    setAnswers((prev) => {
+      const updatedAnswers = { ...prev };
+
+      // Get the previous question key
+      const currentQuestion = questionTree[currentQuestionKey];
+      const previousQuestionKey = currentQuestion?.previous;
+
+      // Delete the answer for the question we're going back to
+      if (previousQuestionKey) {
+        delete updatedAnswers[previousQuestionKey];
+      }
+
+      return updatedAnswers;
+    });
+
+    // Move to the previous question
+    const previousQuestionKey = questionTree[currentQuestionKey]?.previous;
+    if (previousQuestionKey) {
+      setCurrentQuestionKey(previousQuestionKey);
+    }
+  };
+
   return (
     <div>
       <h4>Project Questionnaire</h4>
+
+      <TagDisplay answers={answers} />
+
+      {/* Go Back Button */}
+      {currentQuestionKey !== "start" &&
+        currentQuestionKey !== "done" &&
+        currentQuestionKey !== "project-name" && (
+          <button onClick={handlePreviousQuestion}>Go Back</button>
+        )}
+
       <QuestionnaireForm
         questionTree={questionTree}
         currentQuestionKey={currentQuestionKey}
