@@ -21,9 +21,7 @@
     "question": "Which frontend framework would you like to use?",
     "options": [
       { "label": "React", "value": "react", "next": "react-variant" },
-      { "label": "Svelte", "value": "svelte", "next": "frontend-language" },
-      { "label": "Vue", "value": "vue", "next": "vue-variant" },
-      { "label": "Vanilla", "value": "static", "next": "frontend-language" }
+      { "label": "Vue", "value": "vue", "next": "vue-variant" }
     ],
     "previous": "frontend"
   },
@@ -210,15 +208,6 @@
     "previous": "vue-official-starter-add-eslint"
   },
 
-  "frontend-language": {
-    "question": "Which frontend language would you like to use?",
-    "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
-      { "label": "TypeScript", "value": "typescript", "next": "project-name" }
-    ],
-    "previous": "frontend-framework"
-  },
-
   "backend": {
     "question": "Would you like to use a backend framework?",
     "options": [
@@ -293,7 +282,7 @@
       {
         "label": "No",
         "value": "separate",
-        "next": "full-stack-separate-frontend"
+        "next": "full-stack-separate-backend"
       }
     ],
     "previous": "start"
@@ -305,34 +294,15 @@
       {
         "label": "Next",
         "value": "next",
-        "next": "full-stack-frontend-language"
+        "next": "project-name"
       },
       {
         "label": "Nuxt",
         "value": "nuxt",
-        "next": "full-stack-frontend-language"
-      },
-      {
-        "label": "SvelteKit",
-        "value": "sveltekit",
-        "next": "full-stack-frontend-language"
-      },
-      {
-        "label": "Laravel",
-        "value": "laravel",
-        "next": "full-stack-frontend-language"
+        "next": "project-name"
       }
     ],
     "previous": "full-stack"
-  },
-
-  "full-stack-frontend-language": {
-    "question": "Which frontend language would you like to use in your full-stack project?",
-    "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
-      { "label": "TypeScript", "value": "typescript", "next": "project-name" }
-    ],
-    "previous": "full-stack-framework"
   },
 
   "full-stack-separate-frontend": {
@@ -352,45 +322,234 @@
     "previous": "full-stack"
   },
 
-  "full-stack-separate-frontend-framework": {
-    "question": "Which frontend framework would you like to use?",
-    "options": [
-      {
-        "label": "React",
-        "value": "react",
-        "next": "full-stack-separate-frontend-language"
-      },
-      {
-        "label": "Vue",
-        "value": "vue",
-        "next": "full-stack-separate-frontend-language"
-      },
-      {
-        "label": "Vanilla JavaScript",
-        "value": "vanilla",
-        "next": "full-stack-separate-frontend-language"
-      }
-    ],
-    "previous": "full-stack-separate-frontend"
-  },
-
   "full-stack-separate-frontend-language": {
     "question": "Which language would you like to use for the frontend?",
     "options": [
       {
         "label": "JavaScript",
         "value": "javascript",
-        "next": "full-stack-separate-backend"
+        "next": "project-name"
       },
       {
         "label": "TypeScript",
         "value": "typescript",
-        "next": "full-stack-separate-backend"
+        "next": "project-name"
       }
     ],
     "previous": "full-stack-separate-frontend-framework"
   },
 
+  "full-stack-separate-frontend-framework": {
+    "question": "Which frontend framework would you like to use?",
+    "options": [
+      {
+        "label": "React",
+        "value": "react",
+        "next": "full-stack-react-variant"
+      },
+      {
+        "label": "Vue",
+        "value": "vue",
+        "next": "full-stack-vue-variant"
+      }
+    ],
+    "previous": "full-stack-separate-frontend"
+  },
+
+  "full-stack-react-variant": {
+    "question": "Select a variant of React",
+    "options": [
+      {
+        "label": "TypeScript",
+        "value": "typescript",
+        "next": "project-name"
+      },
+      {
+        "label": "TypeScript + SWC",
+        "value": "typescript+swc",
+        "next": "project-name"
+      },
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "next": "project-name"
+      },
+      {
+        "label": "JavaScript + SWC",
+        "value": "javascript+swc",
+        "next": "project-name"
+      },
+      {
+        "label": "React Router v7",
+        "value": "reactrouterv7",
+        "next": "project-name"
+      }
+    ],
+    "previous": "full-stack-separate-frontend-framework"
+  },
+
+  "full-stack-vue-variant": {
+    "question": "Select a variant of Vue",
+    "options": [
+      {
+        "label": "TypeScript",
+        "value": "typescript",
+        "next": "project-name"
+      },
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "next": "project-name"
+      },
+      {
+        "label": "Official Vue Starter",
+        "value": "officialvuestarter",
+        "next": "full-stack-vue-official-starter-add-typescript"
+      }
+    ],
+    "previous": "full-stack-separate-frontend-framework"
+  },
+
+  "full-stack-vue-official-starter-add-typescript": {
+    "question": "Would you like to add TypeScript?",
+    "options": [
+      {
+        "label": "Yes",
+        "value": "yes",
+        "next": "full-stack-vue-official-starter-jsx-support"
+      },
+      {
+        "label": "No",
+        "value": "no",
+        "next": "full-stack-vue-official-starter-jsx-support"
+      }
+    ],
+    "previous": "full-stack-vue-variant"
+  },
+
+  "full-stack-vue-official-starter-jsx-support": {
+    "question": "Would you like to add JSX support?",
+    "options": [
+      {
+        "label": "Yes",
+        "value": "yes",
+        "next": "full-stack-vue-official-starter-add-vue-router"
+      },
+      {
+        "label": "No",
+        "value": "no",
+        "next": "full-stack-vue-official-starter-add-vue-router"
+      }
+    ],
+    "previous": "full-stack-vue-official-starter-add-typescript"
+  },
+
+  "full-stack-vue-official-starter-add-vue-router": {
+    "question": "Would you like to add Vue Router for Single Page Application (SPA) development?",
+    "options": [
+      {
+        "label": "Yes",
+        "value": "yes",
+        "next": "full-stack-vue-official-starter-add-pinia"
+      },
+      {
+        "label": "No",
+        "value": "no",
+        "next": "full-stack-vue-official-starter-add-pinia"
+      }
+    ],
+    "previous": "full-stack-vue-official-starter-jsx-support"
+  },
+
+  "full-stack-vue-official-starter-add-pinia": {
+    "question": "Would you like to add Pinia for state management?",
+    "options": [
+      {
+        "label": "Yes",
+        "value": "yes",
+        "next": "full-stack-vue-official-starter-add-vitest"
+      },
+      {
+        "label": "No",
+        "value": "no",
+        "next": "full-stack-vue-official-starter-add-vitest"
+      }
+    ],
+    "previous": "full-stack-vue-official-starter-add-vue-router"
+  },
+
+  "full-stack-vue-official-starter-add-vitest": {
+    "question": "Would you like to add Vitest for Unit Testing?",
+    "options": [
+      {
+        "label": "Yes",
+        "value": "yes",
+        "next": "full-stack-vue-official-starter-e2e-testing"
+      },
+      {
+        "label": "No",
+        "value": "no",
+        "next": "full-stack-vue-official-starter-e2e-testing"
+      }
+    ],
+    "previous": "full-stack-vue-official-starter-add-pinia"
+  },
+
+  "full-stack-vue-official-starter-e2e-testing": {
+    "question": "Would you like to add an End-to-End Testing Solution?",
+    "options": [
+      {
+        "label": "No",
+        "value": "no",
+        "next": "full-stack-vue-official-starter-add-eslint"
+      },
+      {
+        "label": "Cypress",
+        "description": "Also supports unit testing with Cypress Component Testing",
+        "value": "cypress",
+        "next": "full-stack-vue-official-starter-add-eslint"
+      },
+      {
+        "label": "Nightwatch",
+        "description": "Also supports unit testing with Nightwatch Component Testing",
+        "value": "nightwatch",
+        "next": "full-stack-vue-official-starter-add-eslint"
+      },
+      {
+        "label": "Playwright",
+        "value": "playwright",
+        "next": "full-stack-vue-official-starter-add-eslint"
+      }
+    ],
+    "previous": "full-stack-vue-official-starter-add-vitest"
+  },
+
+  "full-stack-vue-official-starter-add-eslint": {
+    "question": "Would you like to add ESLint for linting?",
+    "options": [
+      {
+        "label": "Yes",
+        "value": "yes",
+        "next": "full-stack-vue-official-starter-add-prettier"
+      },
+      {
+        "label": "Yes + Add Oxlint",
+        "value": "yes+oxlint",
+        "next": "full-stack-vue-official-starter-add-prettier"
+      },
+      { "label": "No", "value": "no", "next": "project-name" }
+    ],
+    "previous": "full-stack-vue-official-starter-e2e-testing"
+  },
+
+  "full-stack-vue-official-starter-add-prettier": {
+    "question": "Would you like to add Prettier for code formatting?",
+    "options": [
+      { "label": "Yes", "value": "yes", "next": "project-name" },
+      { "label": "No", "value": "no", "next": "project-name" }
+    ],
+    "previous": "full-stack-vue-official-starter-add-eslint"
+  },
   "full-stack-separate-backend": {
     "question": "Would you like to use a backend framework in your full-stack project?",
     "options": [
@@ -405,15 +564,27 @@
         "next": "full-stack-separate-backend-language"
       }
     ],
-    "previous": "full-stack-separate-frontend-language"
+    "previous": "full-stack"
   },
 
   "full-stack-separate-backend-language": {
     "question": "Which backend language would you like to use?",
     "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
-      { "label": "Python", "value": "python", "next": "project-name" },
-      { "label": "Java", "value": "java", "next": "project-name" }
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "next": "full-stack-separate-frontend"
+      },
+      {
+        "label": "Python",
+        "value": "python",
+        "next": "full-stack-separate-frontend"
+      },
+      {
+        "label": "Java",
+        "value": "java",
+        "next": "full-stack-separate-frontend"
+      }
     ],
     "previous": "full-stack-separate-backend"
   },
@@ -443,7 +614,11 @@
   "full-stack-separate-backend-javascript-framework": {
     "question": "Which JavaScript backend framework would you like to use?",
     "options": [
-      { "label": "Express", "value": "express", "next": "project-name" }
+      {
+        "label": "Express",
+        "value": "express",
+        "next": "full-stack-separate-frontend"
+      }
     ],
     "previous": "full-stack-separate-backend-framework-language"
   },
@@ -451,9 +626,21 @@
   "full-stack-separate-backend-python-framework": {
     "question": "Which Python backend framework would you like to use?",
     "options": [
-      { "label": "Flask", "value": "flask", "next": "project-name" },
-      { "label": "Django", "value": "django", "next": "project-name" },
-      { "label": "FastAPI", "value": "fastapi", "next": "project-name" }
+      {
+        "label": "Flask",
+        "value": "flask",
+        "next": "full-stack-separate-frontend"
+      },
+      {
+        "label": "Django",
+        "value": "django",
+        "next": "full-stack-separate-frontend"
+      },
+      {
+        "label": "FastAPI",
+        "value": "fastapi",
+        "next": "full-stack-separate-frontend"
+      }
     ],
     "previous": "full-stack-separate-backend-framework-language"
   },
@@ -464,7 +651,7 @@
       {
         "label": "Spring Boot (with Maven)",
         "value": "spring-boot",
-        "next": "project-name"
+        "next": "full-stack-separate-frontend"
       }
     ],
     "previous": "full-stack-separate-backend-framework-language"
