@@ -11,12 +11,14 @@ interface QuestionnaireFormProps {
     answerValue: string,
     nextKey: QuestionKey
   ) => void;
+  onAddTag?: (tag: string) => void;
 }
 
 const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
   questionTree,
   currentQuestionKey,
   onNextQuestion,
+  onAddTag,
 }) => {
   const currentQuestion = questionTree[currentQuestionKey];
 
@@ -45,6 +47,20 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
     onNextQuestion(currentQuestionKey, projectName, "done");
   };
 
+  const handleOptionSelect = (option: any) => {
+    // Ensure onAddTag is called with all tags if available
+    if (option.tag && onAddTag) {
+      if (Array.isArray(option.tag)) {
+        option.tag.forEach((tag: string) => onAddTag(tag)); // Add each tag separately
+      } else {
+        onAddTag(option.tag);
+      }
+    }
+
+    // Proceed with the existing flow
+    onNextQuestion(currentQuestionKey, option.value, option.next);
+  };
+
   if (!currentQuestion) return <p>Error: Question not found.</p>;
 
   return (
@@ -66,9 +82,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
           {currentQuestion.options.map((option) => (
             <button
               key={option.value}
-              onClick={() =>
-                onNextQuestion(currentQuestionKey, option.value, option.next)
-              }
+              onClick={() => handleOptionSelect(option)}
             >
               {option.label}
             </button>

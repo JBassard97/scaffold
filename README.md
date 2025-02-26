@@ -17,11 +17,9 @@
             - JavaScript + SWC
             - React Router v7
           - Vue
-
             - TypeScript
             - JavaScript
             - Official Vue Starter
-
               - Add TypeScript? (Yes/No)
               - Add JSX support? (Yes/No)
               - Add Vue Router for SPA? (Yes/No)
@@ -38,6 +36,9 @@
                 - Yes + Add Oxlint
                   - Add Prettier for code formatting? (Yes/No)
                 - No
+            - Svelte
+              - TypeScript
+              - JavaScript
 
       - No (Vanilla)
         - Language Selection (JavaScript/TypeScript)
@@ -66,12 +67,15 @@
     <br>
 
   - **Full Stack**
+
     - Use Framework?
+
       - Yes
         - Framework Options
           - Next
           - Nuxt
       - No (Separate)
+
         - Backend Setup
           - Use Framework?
             - Yes
@@ -90,9 +94,13 @@
                 - Python
                 - Java
         - Frontend Setup
+
           - Use Framework?
+
             - Yes
+
               - Framework Options
+
                 - React
                   - TypeScript
                   - TypeScript + SWC
@@ -100,9 +108,11 @@
                   - JavaScript + SWC
                   - React Router v7
                 - Vue
+
                   - TypeScript
                   - JavaScript
                   - Official Vue Starter
+
                     - Add TypeScript? (Yes/No)
                     - Add JSX support? (Yes/No)
                     - Add Vue Router for SPA? (Yes/No)
@@ -115,9 +125,15 @@
                       - Playwright
                     - Add ESLint for linting?
                       - Yes
+                        - Add Prettier for code formatting? (Yes/No)
                       - Yes + Add Oxlint
+                        - Add Prettier for code formatting? (Yes/No)
                       - No
-                    - Add Prettier for code formatting? (Yes/No)
+
+                - Svelte
+                  - TypeScript
+                  - JavaScript
+
             - No (Vanilla)
               - Language Selection
                 - JavaScript

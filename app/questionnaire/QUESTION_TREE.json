@@ -2,17 +2,42 @@
   "start": {
     "question": "Which would you like to build?",
     "options": [
-      { "label": "Frontend", "value": "frontend", "next": "frontend" },
-      { "label": "Backend", "value": "backend", "next": "backend" },
-      { "label": "Full Stack", "value": "full-stack", "next": "full-stack" }
+      {
+        "label": "Frontend",
+        "value": "frontend",
+        "tag": "Frontend",
+        "next": "frontend"
+      },
+      {
+        "label": "Backend",
+        "value": "backend",
+        "tag": "Backend",
+        "next": "backend"
+      },
+      {
+        "label": "Full Stack",
+        "value": "full-stack",
+        "tag": "Full Stack",
+        "next": "full-stack"
+      }
     ]
   },
 
   "frontend": {
     "question": "Would you like to use a frontend framework?",
     "options": [
-      { "label": "Yes", "value": "framework", "next": "frontend-framework" },
-      { "label": "No", "value": "vanilla", "next": "frontend-language" }
+      {
+        "label": "Yes",
+        "value": "framework",
+        "tag": "Frontend Framework",
+        "next": "frontend-framework"
+      },
+      {
+        "label": "No",
+        "value": "vanilla",
+        "tag": "Vanilla",
+        "next": "frontend-language"
+      }
     ],
     "previous": "start"
   },
@@ -20,8 +45,19 @@
   "frontend-framework": {
     "question": "Which frontend framework would you like to use?",
     "options": [
-      { "label": "React", "value": "react", "next": "react-variant" },
-      { "label": "Vue", "value": "vue", "next": "vue-variant" }
+      {
+        "label": "React",
+        "value": "react",
+        "tag": "React",
+        "next": "react-variant"
+      },
+      { "label": "Vue", "value": "vue", "tag": "Vue", "next": "vue-variant" },
+      {
+        "label": "Svelte",
+        "value": "svelte",
+        "tag": "Svelte",
+        "next": "svelte-variant"
+      }
     ],
     "previous": "frontend"
   },
@@ -29,21 +65,34 @@
   "react-variant": {
     "question": "Select a variant of React",
     "options": [
-      { "label": "TypeScript", "value": "typescript", "next": "project-name" },
+      {
+        "label": "TypeScript",
+        "value": "typescript",
+        "tag": "TypeScript",
+        "next": "project-name"
+      },
       {
         "label": "TypeScript + SWC",
         "value": "typescript+swc",
+        "tag": ["TypeScript", "SWC"],
         "next": "project-name"
       },
-      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "tag": "JavaScript",
+        "next": "project-name"
+      },
       {
         "label": "JavaScript + SWC",
         "value": "javascript+swc",
+        "tag": ["JavaScript", "SWC"],
         "next": "project-name"
       },
       {
         "label": "React Router v7",
         "value": "reactrouterv7",
+        "tag": "React Router",
         "next": "project-name"
       }
     ],
@@ -52,11 +101,22 @@
   "vue-variant": {
     "question": "Select a variant of Vue",
     "options": [
-      { "label": "TypeScript", "value": "typescript", "next": "project-name" },
-      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
+      {
+        "label": "TypeScript",
+        "value": "typescript",
+        "tag": "TypeScript",
+        "next": "project-name"
+      },
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "tag": "JavaScript",
+        "next": "project-name"
+      },
       {
         "label": "Official Vue Starter",
         "value": "officialvuestarter",
+        "tag": "Official Vue Starter",
         "next": "vue-official-starter-add-typescript"
       }
     ],
@@ -67,12 +127,14 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "TypeScript",
         "next": "vue-official-starter-jsx-support"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
+        "tag": "JavaScript",
         "next": "vue-official-starter-jsx-support"
       }
     ],
@@ -83,12 +145,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "JSX Support",
         "next": "vue-official-starter-add-vue-router"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "vue-official-starter-add-vue-router"
       }
     ],
@@ -99,12 +162,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "Vue Router",
         "next": "vue-official-starter-add-pinia"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "vue-official-starter-add-pinia"
       }
     ],
@@ -115,12 +179,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": ["Pinia", "State Management"],
         "next": "vue-official-starter-add-vitest"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "vue-official-starter-add-vitest"
       }
     ],
@@ -131,12 +196,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": ["Vitest", "Unit Testing"],
         "next": "vue-official-starter-e2e-testing"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "vue-official-starter-e2e-testing"
       }
     ],
@@ -147,24 +213,28 @@
     "options": [
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "vue-official-starter-add-eslint"
       },
       {
         "label": "Cypress",
         "description": "Also supports unit testing with Cypress Component Testing",
         "value": "cypress",
+        "tag": ["Cypress", "End-to-End Testing", "Component Testing"],
         "next": "vue-official-starter-add-eslint"
       },
       {
         "label": "Nightwatch",
         "description": "Also supports unit testing with Nightwatch Component Testing",
         "value": "nightwatch",
+        "tag": ["Nightwatch", "End-to-End Testing", "Component Testing"],
+
         "next": "vue-official-starter-add-eslint"
       },
       {
         "label": "Playwright",
         "value": "playwright",
+        "tag": ["Playwright", "End-to-End Testing"],
         "next": "vue-official-starter-add-eslint"
       }
     ],
@@ -175,17 +245,19 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "ESLint",
         "next": "vue-official-starter-add-prettier"
       },
       {
         "label": "Yes + Add Oxlint",
         "value": "yes+oxlint",
+        "tag": ["ESLint", "Oxlint"],
         "next": "vue-official-starter-add-prettier"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "project-name"
       }
     ],
@@ -196,16 +268,35 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "Prettier",
         "next": "project-name"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "project-name"
       }
     ],
     "previous": "vue-official-starter-add-eslint"
+  },
+  "svelte-variant": {
+    "question": "Select a variant of Svelte",
+    "options": [
+      {
+        "label": "TypeScript",
+        "value": "typescript",
+        "tag": "TypeScript",
+        "next": "project-name"
+      },
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "tag": "JavaScript",
+        "next": "project-name"
+      }
+    ],
+    "previous": "frontend-framework"
   },
 
   "backend": {
@@ -214,9 +305,15 @@
       {
         "label": "Yes",
         "value": "framework",
+        "tag": "Backend Framework",
         "next": "backend-framework-language"
       },
-      { "label": "No", "value": "vanilla", "next": "backend-language" }
+      {
+        "label": "No",
+        "value": "vanilla",
+        "tag": "Vanilla",
+        "next": "backend-language"
+      }
     ],
     "previous": "start"
   },
@@ -224,9 +321,24 @@
   "backend-language": {
     "question": "Which backend language would you like to use?",
     "options": [
-      { "label": "JavaScript", "value": "javascript", "next": "project-name" },
-      { "label": "Python", "value": "python", "next": "project-name" },
-      { "label": "Java", "value": "java", "next": "project-name" }
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "tag": "JavaScript",
+        "next": "project-name"
+      },
+      {
+        "label": "Python",
+        "value": "python",
+        "tag": "Python",
+        "next": "project-name"
+      },
+      {
+        "label": "Java",
+        "value": "java",
+        "tag": "Java",
+        "next": "project-name"
+      }
     ],
     "previous": "backend"
   },
@@ -237,10 +349,21 @@
       {
         "label": "JavaScript",
         "value": "javascript",
+        "tag": "JavaScript",
         "next": "javascript-framework"
       },
-      { "label": "Python", "value": "python", "next": "python-framework" },
-      { "label": "Java", "value": "java", "next": "java-framework" }
+      {
+        "label": "Python",
+        "value": "python",
+        "tag": "Python",
+        "next": "python-framework"
+      },
+      {
+        "label": "Java",
+        "value": "java",
+        "tag": "Java",
+        "next": "java-framework"
+      }
     ],
     "previous": "backend"
   },
@@ -248,7 +371,12 @@
   "javascript-framework": {
     "question": "Which JavaScript backend framework would you like to use?",
     "options": [
-      { "label": "Express", "value": "express", "next": "project-name" }
+      {
+        "label": "Express",
+        "value": "express",
+        "tag": "Express",
+        "next": "project-name"
+      }
     ],
     "previous": "backend-framework-language"
   },
@@ -256,9 +384,24 @@
   "python-framework": {
     "question": "Which Python backend framework would you like to use?",
     "options": [
-      { "label": "Flask", "value": "flask", "next": "project-name" },
-      { "label": "Django", "value": "django", "next": "project-name" },
-      { "label": "FastAPI", "value": "fastapi", "next": "project-name" }
+      {
+        "label": "Flask",
+        "value": "flask",
+        "tag": "Flask",
+        "next": "project-name"
+      },
+      {
+        "label": "Django",
+        "value": "django",
+        "tag": "Django",
+        "next": "project-name"
+      },
+      {
+        "label": "FastAPI",
+        "value": "fastapi",
+        "tag": "FastAPI",
+        "next": "project-name"
+      }
     ],
     "previous": "backend-framework-language"
   },
@@ -267,8 +410,9 @@
     "question": "Which Java backend framework would you like to use?",
     "options": [
       {
-        "label": "Spring Boot (with Maven)",
+        "label": "Spring Boot",
         "value": "spring-boot",
+        "tag": "Spring Boot",
         "next": "project-name"
       }
     ],
@@ -278,10 +422,16 @@
   "full-stack": {
     "question": "Would you like to use a full-stack framework?",
     "options": [
-      { "label": "Yes", "value": "framework", "next": "full-stack-framework" },
+      {
+        "label": "Yes",
+        "value": "framework",
+        "tag": "Full Stack Framework",
+        "next": "full-stack-framework"
+      },
       {
         "label": "No",
         "value": "separate",
+        "tag": "Separate Client/Server",
         "next": "full-stack-separate-backend"
       }
     ],
@@ -294,11 +444,13 @@
       {
         "label": "Next",
         "value": "next",
+        "tag": "Next",
         "next": "project-name"
       },
       {
         "label": "Nuxt",
         "value": "nuxt",
+        "tag": "Nuxt",
         "next": "project-name"
       }
     ],
@@ -311,11 +463,13 @@
       {
         "label": "Yes",
         "value": "framework",
+        "tag": "Frontend Framework",
         "next": "full-stack-separate-frontend-framework"
       },
       {
         "label": "No",
         "value": "vanilla",
+        "tag": "Vanilla",
         "next": "full-stack-separate-frontend-language"
       }
     ],
@@ -328,11 +482,13 @@
       {
         "label": "JavaScript",
         "value": "javascript",
+        "tag": "JavaScript",
         "next": "project-name"
       },
       {
         "label": "TypeScript",
         "value": "typescript",
+        "tag": "TypeScript",
         "next": "project-name"
       }
     ],
@@ -345,12 +501,20 @@
       {
         "label": "React",
         "value": "react",
+        "tag": "React",
         "next": "full-stack-react-variant"
       },
       {
         "label": "Vue",
         "value": "vue",
+        "tag": "Vue",
         "next": "full-stack-vue-variant"
+      },
+      {
+        "label": "Svelte",
+        "value": "svelte",
+        "tag": "Svelte",
+        "next": "full-stack-svelte-variant"
       }
     ],
     "previous": "full-stack-separate-frontend"
@@ -362,26 +526,31 @@
       {
         "label": "TypeScript",
         "value": "typescript",
+        "tag": "TypeScript",
         "next": "project-name"
       },
       {
         "label": "TypeScript + SWC",
         "value": "typescript+swc",
+        "tag": ["TypeScript", "SWC"],
         "next": "project-name"
       },
       {
         "label": "JavaScript",
         "value": "javascript",
+        "tag": "JavaScript",
         "next": "project-name"
       },
       {
         "label": "JavaScript + SWC",
         "value": "javascript+swc",
+        "tag": ["JavaScript", "SWC"],
         "next": "project-name"
       },
       {
         "label": "React Router v7",
         "value": "reactrouterv7",
+        "tag": "React Router",
         "next": "project-name"
       }
     ],
@@ -394,16 +563,19 @@
       {
         "label": "TypeScript",
         "value": "typescript",
+        "tag": "TypeScript",
         "next": "project-name"
       },
       {
         "label": "JavaScript",
         "value": "javascript",
+        "tag": "JavaScript",
         "next": "project-name"
       },
       {
         "label": "Official Vue Starter",
         "value": "officialvuestarter",
+        "tag": "Official Vue Starter",
         "next": "full-stack-vue-official-starter-add-typescript"
       }
     ],
@@ -415,12 +587,14 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "TypeScript",
         "next": "full-stack-vue-official-starter-jsx-support"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
+        "tag": "JavaScript",
         "next": "full-stack-vue-official-starter-jsx-support"
       }
     ],
@@ -432,12 +606,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "JSX Support",
         "next": "full-stack-vue-official-starter-add-vue-router"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "full-stack-vue-official-starter-add-vue-router"
       }
     ],
@@ -449,12 +624,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "Vue Router",
         "next": "full-stack-vue-official-starter-add-pinia"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "full-stack-vue-official-starter-add-pinia"
       }
     ],
@@ -466,12 +642,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": ["Pinia", "State Management"],
         "next": "full-stack-vue-official-starter-add-vitest"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "full-stack-vue-official-starter-add-vitest"
       }
     ],
@@ -483,12 +660,13 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": ["Vitest", "Unit Testing"],
         "next": "full-stack-vue-official-starter-e2e-testing"
       },
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "full-stack-vue-official-starter-e2e-testing"
       }
     ],
@@ -500,24 +678,27 @@
     "options": [
       {
         "label": "No",
-        "value": "no",
+        "value": false,
         "next": "full-stack-vue-official-starter-add-eslint"
       },
       {
         "label": "Cypress",
         "description": "Also supports unit testing with Cypress Component Testing",
         "value": "cypress",
+        "tag": ["Cypress", "End-to-End Testing", "Component Testing"],
         "next": "full-stack-vue-official-starter-add-eslint"
       },
       {
         "label": "Nightwatch",
         "description": "Also supports unit testing with Nightwatch Component Testing",
         "value": "nightwatch",
+        "tag": ["Nightwatch", "End-to-End Testing", "Component Testing"],
         "next": "full-stack-vue-official-starter-add-eslint"
       },
       {
         "label": "Playwright",
         "value": "playwright",
+        "tag": ["Playwright", "End-to-End Testing"],
         "next": "full-stack-vue-official-starter-add-eslint"
       }
     ],
@@ -529,38 +710,65 @@
     "options": [
       {
         "label": "Yes",
-        "value": "yes",
+        "value": true,
+        "tag": "ESLint",
         "next": "full-stack-vue-official-starter-add-prettier"
       },
       {
         "label": "Yes + Add Oxlint",
         "value": "yes+oxlint",
+        "tag": ["ESLint", "Oxlint"],
         "next": "full-stack-vue-official-starter-add-prettier"
       },
-      { "label": "No", "value": "no", "next": "project-name" }
+      { "label": "No", "value": false, "next": "project-name" }
     ],
     "previous": "full-stack-vue-official-starter-e2e-testing"
   },
-
   "full-stack-vue-official-starter-add-prettier": {
     "question": "Would you like to add Prettier for code formatting?",
     "options": [
-      { "label": "Yes", "value": "yes", "next": "project-name" },
-      { "label": "No", "value": "no", "next": "project-name" }
+      {
+        "label": "Yes",
+        "value": true,
+        "tag": "Prettier",
+        "next": "project-name"
+      },
+      { "label": "No", "value": false, "next": "project-name" }
     ],
     "previous": "full-stack-vue-official-starter-add-eslint"
   },
+  "full-stack-svelte-variant": {
+    "question": "Select a variant of Svelte",
+    "options": [
+      {
+        "label": "TypeScript",
+        "value": "typescript",
+        "tag": "TypeScript",
+        "next": "project-name"
+      },
+      {
+        "label": "JavaScript",
+        "value": "javascript",
+        "tag": "JavaScript",
+        "next": "project-name"
+      }
+    ],
+    "previous": "full-stack-separate-frontend-framework"
+  },
+
   "full-stack-separate-backend": {
     "question": "Would you like to use a backend framework in your full-stack project?",
     "options": [
       {
         "label": "Yes",
         "value": "framework",
+        "tag": "Backend Framework",
         "next": "full-stack-separate-backend-framework-language"
       },
       {
         "label": "No",
         "value": "vanilla",
+        "tag": "Vanilla",
         "next": "full-stack-separate-backend-language"
       }
     ],
@@ -573,16 +781,19 @@
       {
         "label": "JavaScript",
         "value": "javascript",
+        "tag": "JavaScript",
         "next": "full-stack-separate-frontend"
       },
       {
         "label": "Python",
         "value": "python",
+        "tag": "Python",
         "next": "full-stack-separate-frontend"
       },
       {
         "label": "Java",
         "value": "java",
+        "tag": "Java",
         "next": "full-stack-separate-frontend"
       }
     ],
@@ -595,16 +806,19 @@
       {
         "label": "JavaScript",
         "value": "javascript",
+        "tag": "JavaScript",
         "next": "full-stack-separate-backend-javascript-framework"
       },
       {
         "label": "Python",
         "value": "python",
+        "tag": "Python",
         "next": "full-stack-separate-backend-python-framework"
       },
       {
         "label": "Java",
         "value": "java",
+        "tag":"Java",
         "next": "full-stack-separate-backend-java-framework"
       }
     ],
@@ -617,6 +831,7 @@
       {
         "label": "Express",
         "value": "express",
+        "tag":"Express",
         "next": "full-stack-separate-frontend"
       }
     ],
@@ -629,16 +844,19 @@
       {
         "label": "Flask",
         "value": "flask",
+        "tag": "Flask",
         "next": "full-stack-separate-frontend"
       },
       {
         "label": "Django",
         "value": "django",
+        "tag": "Django",
         "next": "full-stack-separate-frontend"
       },
       {
         "label": "FastAPI",
         "value": "fastapi",
+        "tag": "FastAPI",
         "next": "full-stack-separate-frontend"
       }
     ],
@@ -649,8 +867,9 @@
     "question": "Which Java backend framework would you like to use?",
     "options": [
       {
-        "label": "Spring Boot (with Maven)",
+        "label": "Spring Boot",
         "value": "spring-boot",
+        "tag": "Spring Boot",
         "next": "full-stack-separate-frontend"
       }
     ],

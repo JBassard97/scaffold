@@ -7,10 +7,19 @@ import { TagDisplay } from "../components/TagDisplay/TagDisplay";
 import { QuestionKey, QuestionTree } from "@/types";
 
 const QuestionnairePage = () => {
-  const questionTree: QuestionTree = QUESTION_TREE;
+  const questionTree: any = QUESTION_TREE;
   const [currentQuestionKey, setCurrentQuestionKey] =
     useState<QuestionKey>("start");
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [tags, setTags] = useState<string[]>([]);
+
+  // New function to handle adding tags
+  const handleAddTag = (tag: string) => {
+    // Only add the tag if it doesn't already exist
+    if (!tags.includes(tag)) {
+      setTags((prevTags) => [...prevTags, tag]);
+    }
+  };
 
   const handleNextQuestion = (
     questionKey: QuestionKey,
@@ -23,9 +32,10 @@ const QuestionnairePage = () => {
       [questionKey]: answerValue,
     }));
 
-    // If questionnaire is complete, log answers
+    // If questionnaire is complete, log answers and tags
     if (nextKey === "done") {
       console.log("Final Answers:", { ...answers, [questionKey]: answerValue });
+      console.log("Final Tags:", tags);
       setCurrentQuestionKey("done");
       return;
     }
@@ -35,24 +45,36 @@ const QuestionnairePage = () => {
   };
 
   const handlePreviousQuestion = () => {
-    setAnswers((prev) => {
-      const updatedAnswers = { ...prev };
+    // Get the current question
+    const currentQuestion = questionTree[currentQuestionKey];
+    const previousQuestionKey = currentQuestion?.previous;
 
-      // Get the previous question key
-      const currentQuestion = questionTree[currentQuestionKey];
-      const previousQuestionKey = currentQuestion?.previous;
+    if (previousQuestionKey) {
+      // We need to check if the current answer had a tag associated with it
+      const currentAnswerValue = answers[currentQuestionKey];
 
-      // Delete the answer for the question we're going back to
-      if (previousQuestionKey) {
-        delete updatedAnswers[previousQuestionKey];
+      if (currentAnswerValue) {
+        // Find the selected option that corresponds to this answer
+        const selectedOption = currentQuestion.options?.find(
+          (opt: any) => opt.value === currentAnswerValue
+        );
+
+        // If this option had a tag, we need to remove it
+        if (selectedOption?.tag) {
+          setTags((prevTags) =>
+            prevTags.filter((tag) => tag !== selectedOption.tag)
+          );
+        }
       }
 
-      return updatedAnswers;
-    });
+      // Update answers - remove the current answer when going back
+      setAnswers((prev) => {
+        const updatedAnswers = { ...prev };
+        delete updatedAnswers[currentQuestionKey];
+        return updatedAnswers;
+      });
 
-    // Move to the previous question
-    const previousQuestionKey = questionTree[currentQuestionKey]?.previous;
-    if (previousQuestionKey) {
+      // Move to the previous question
       setCurrentQuestionKey(previousQuestionKey);
     }
   };
@@ -61,7 +83,7 @@ const QuestionnairePage = () => {
     <div>
       <h4>Project Questionnaire</h4>
 
-      <TagDisplay answers={answers} />
+      <TagDisplay tags={tags} />
 
       {/* Go Back Button */}
       {currentQuestionKey !== "start" &&
@@ -74,6 +96,7 @@ const QuestionnairePage = () => {
         questionTree={questionTree}
         currentQuestionKey={currentQuestionKey}
         onNextQuestion={handleNextQuestion}
+        onAddTag={handleAddTag}
       />
     </div>
   );

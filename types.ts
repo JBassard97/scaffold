@@ -13,6 +13,7 @@ export type QuestionKey = string;
 
 export interface QuestionOption {
     label: string;
+    description: string;
     value: string;
     next: QuestionKey;
 }
