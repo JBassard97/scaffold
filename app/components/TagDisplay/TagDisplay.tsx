@@ -1,6 +1,5 @@
 "use client";
 
-import { Span } from "next/dist/trace";
 import React from "react";
 
 interface TagDisplayProps {
@@ -24,35 +23,25 @@ export function TagDisplay({ answers }: TagDisplayProps) {
       "fastapi",
       "spring-boot",
     ];
-    const fullStackFrameworks = ["next", "laravel"];
+    const fullStackFrameworks = ["next", "nuxt", "sveltekit", "laravel"];
     let tag = "";
 
     if (startValues.includes(value)) {
       tag = capitalizeFirst(value);
-    }
-
-    if (value === "framework") {
+    } else if (value === "framework") {
       tag = `${capitalizeFirst(key) + " " + capitalizeFirst(value)}`;
-    }
-
-    if (langs.includes(value) && key.split("-").includes("language")) {
-      tag = capitalizeFirst(value) + " " + capitalizeFirst(key.split("-")[0]);
-
-      if (key.split("-")[0] === "full") {
-        tag = capitalizeFirst(value)
-      }
-    }
-
-    if (value === "separate") {
+    } else if (langs.includes(value) && key.split("-").includes("language")) {
+      tag = capitalizeFirst(value);
+    } else if (value === "separate") {
       tag = "Separate Frontend/Backend";
-    }
-
-    if (
+    } else if (
       backendFrameworks.includes(value) ||
       frontendFrameworks.includes(value) ||
       fullStackFrameworks.includes(value)
     ) {
       tag = capitalizeFirst(value);
+    } else {
+      tag = value;
     }
 
     return "#" + tag;
@@ -61,7 +50,7 @@ export function TagDisplay({ answers }: TagDisplayProps) {
   return (
     <div>
       {Object.entries(answers).map(([key, value]) => (
-        <span key={key} style={{ margin: "0 10px" }}>
+        <span key={key} style={{ marginRight: "10px" }}>
           {taggifyAnswer(key, value)}
         </span>
       ))}
