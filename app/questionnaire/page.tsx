@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QUESTION_TREE from "./QUESTION_TREE.json";
 import QuestionnaireForm from "../components/QuestionnaireForm/QuestionnaireForm";
 import { TagDisplay } from "../components/TagDisplay/TagDisplay";
@@ -12,10 +12,10 @@ const QuestionnairePage = () => {
     useState<QuestionKey>("start");
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [tags, setTags] = useState<string[]>([]);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
-  // New function to handle adding tags
   const handleAddTag = (tag: string) => {
-    // Only add the tag if it doesn't already exist
     if (!tags.includes(tag)) {
       setTags((prevTags) => [...prevTags, tag]);
     }
@@ -26,56 +26,48 @@ const QuestionnairePage = () => {
     answerValue: string,
     nextKey: QuestionKey
   ) => {
-    // Update answers state
     setAnswers((prev) => ({
       ...prev,
       [questionKey]: answerValue,
     }));
 
-    // If questionnaire is complete, log answers and tags
     if (nextKey === "done") {
       console.log("Final Answers:", { ...answers, [questionKey]: answerValue });
       console.log("Final Tags:", tags);
       setCurrentQuestionKey("done");
-      return;
+    } else {
+      setCurrentQuestionKey(nextKey);
     }
-
-    // Move to next question
-    setCurrentQuestionKey(nextKey);
   };
 
-  const handlePreviousQuestion = () => {
-    // Get the current question
-    const currentQuestion = questionTree[currentQuestionKey];
-    const previousQuestionKey = currentQuestion?.previous;
+  useEffect(() => {
+    if (currentQuestionKey === "done") {
+      handleDownload();
+    }
+  }, [currentQuestionKey]);
 
-    if (previousQuestionKey) {
-      // We need to check if the current answer had a tag associated with it
-      const currentAnswerValue = answers[currentQuestionKey];
-
-      if (currentAnswerValue) {
-        // Find the selected option that corresponds to this answer
-        const selectedOption = currentQuestion.options?.find(
-          (opt: any) => opt.value === currentAnswerValue
-        );
-
-        // If this option had a tag, we need to remove it
-        if (selectedOption?.tag) {
-          setTags((prevTags) =>
-            prevTags.filter((tag) => tag !== selectedOption.tag)
-          );
-        }
-      }
-
-      // Update answers - remove the current answer when going back
-      setAnswers((prev) => {
-        const updatedAnswers = { ...prev };
-        delete updatedAnswers[currentQuestionKey];
-        return updatedAnswers;
+  const handleDownload = async () => {
+    setIsDownloading(true);
+    try {
+      const response = await fetch("/api/build", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ answers }),
       });
 
-      // Move to the previous question
-      setCurrentQuestionKey(previousQuestionKey);
+      if (!response.ok) {
+        throw new Error("Failed to generate project files.");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      setDownloadUrl(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -85,11 +77,16 @@ const QuestionnairePage = () => {
 
       <TagDisplay tags={tags} />
 
-      {/* Go Back Button */}
       {currentQuestionKey !== "start" &&
         currentQuestionKey !== "done" &&
         currentQuestionKey !== "project-name" && (
-          <button onClick={handlePreviousQuestion}>Go Back</button>
+          <button
+            onClick={() =>
+              setCurrentQuestionKey(questionTree[currentQuestionKey]?.previous)
+            }
+          >
+            Go Back
+          </button>
         )}
 
       <QuestionnaireForm
@@ -98,6 +95,14 @@ const QuestionnairePage = () => {
         onNextQuestion={handleNextQuestion}
         onAddTag={handleAddTag}
       />
+
+      {downloadUrl && (
+        <a href={downloadUrl} download="project-template.zip">
+          <button disabled={isDownloading}>
+            {isDownloading ? "Downloading..." : "Download Project Files"}
+          </button>
+        </a>
+      )}
     </div>
   );
 };

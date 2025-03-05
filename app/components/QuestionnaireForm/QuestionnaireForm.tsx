@@ -78,13 +78,14 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
           <button onClick={handleComplete}>Complete</button>
         </div>
       ) : (
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
           {currentQuestion.options.map((option) => (
             <button
               key={option.value}
               onClick={() => handleOptionSelect(option)}
             >
-              {option.label}
+              <p>{option.label}</p>
+              {option.description && <p>{option.description}</p>}
             </button>
           ))}
         </div>
