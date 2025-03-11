@@ -12,6 +12,8 @@ interface QuestionnaireFormProps {
     nextKey: QuestionKey
   ) => void;
   onAddTag?: (tag: string) => void;
+  downloadUrl?: string | null;
+  setProjectName: (name: string) => void;
 }
 
 const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
@@ -19,6 +21,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
   currentQuestionKey,
   onNextQuestion,
   onAddTag,
+  downloadUrl,
 }) => {
   const currentQuestion = questionTree[currentQuestionKey];
 
@@ -44,6 +47,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
       );
       return;
     }
+    setProjectName(projectName);
     onNextQuestion(currentQuestionKey, projectName, "done");
   };
 
@@ -65,7 +69,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
 
   return (
     <div>
-      <h2>{currentQuestion.question}</h2>
+      {!downloadUrl ? <h2>{currentQuestion.question}</h2> : <h2>Done!</h2>}
 
       {currentQuestionKey === "project-name" ? (
         <div>

@@ -14,15 +14,16 @@ const QuestionnairePage = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [questionTags, setQuestionTags] = useState<Record<string, string[]>>(
     {}
-  ); // Stores tags per question
+  );
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+
+  // 🔹 Move projectName state here so it can be managed globally
+  const [projectName, setProjectName] = useState("");
 
   const handleAddTag = (tag: string) => {
     if (!tags.includes(tag)) {
       setTags((prevTags) => [...prevTags, tag]);
-
-      // Track which question added this tag
       setQuestionTags((prev) => ({
         ...prev,
         [currentQuestionKey]: [...(prev[currentQuestionKey] || []), tag],
@@ -73,6 +74,9 @@ const QuestionnairePage = () => {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       setDownloadUrl(url);
+
+      // Ensure project name is correctly set
+      setProjectName(answers["project-name"] || "project");
     } catch (error) {
       console.error("Download failed:", error);
     } finally {
@@ -87,34 +91,7 @@ const QuestionnairePage = () => {
     setQuestionTags({});
     setDownloadUrl(null);
     setIsDownloading(false);
-  };
-
-  const handleGoBack = () => {
-    const previousKey = questionTree[currentQuestionKey]?.previous;
-    if (!previousKey) return;
-
-    // Remove the answer for the PREVIOUS question (not the current one)
-    setAnswers((prev) => {
-      const updatedAnswers = { ...prev };
-      delete updatedAnswers[previousKey];
-      return updatedAnswers;
-    });
-
-    // Remove tags associated with the PREVIOUS question
-    setTags((prevTags) => {
-      const tagsToRemove = questionTags[previousKey] || [];
-      return prevTags.filter((tag) => !tagsToRemove.includes(tag));
-    });
-
-    // Remove the entry from questionTags mapping for the PREVIOUS question
-    setQuestionTags((prev) => {
-      const updatedQuestionTags = { ...prev };
-      delete updatedQuestionTags[previousKey];
-      return updatedQuestionTags;
-    });
-
-    // Move to the previous question
-    setCurrentQuestionKey(previousKey);
+    setProjectName(""); // 🔹 Reset project name
   };
 
   return (
@@ -125,23 +102,20 @@ const QuestionnairePage = () => {
 
       <button onClick={handleReset}>Start Over</button>
 
-      {currentQuestionKey !== "start" &&
-        currentQuestionKey !== "done" &&
-        currentQuestionKey !== "project-name" && (
-          <button onClick={handleGoBack} style={{ marginLeft: "5px" }}>
-            Go Back
-          </button>
-        )}
-
       <QuestionnaireForm
         questionTree={questionTree}
         currentQuestionKey={currentQuestionKey}
         onNextQuestion={handleNextQuestion}
         onAddTag={handleAddTag}
+        downloadUrl={downloadUrl}
+        setProjectName={setProjectName} // 🔹 Pass setProjectName to update it
       />
 
       {downloadUrl && (
-        <a href={downloadUrl} download="project-template.zip">
+        <a
+          href={downloadUrl}
+          download={`${answers["project-name"] || "project"}.zip`}
+        >
           <button disabled={isDownloading}>
             {isDownloading ? "Downloading..." : "Download Project Files"}
           </button>

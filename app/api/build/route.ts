@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import archiver from "archiver";
 import stream from "stream";
 import answersToUrl from "./answersToUrl";
+import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
     try {
@@ -10,6 +11,9 @@ export async function POST(req: Request) {
         if (!body.answers || typeof body.answers !== "object") {
             return NextResponse.json({ error: "'answers' is required and must be an object." }, { status: 400 });
         }
+
+        console.log(body.answers);
+        console.log(body.answers["project-name"]);
 
         const repoOwner = process.env.REPO_OWNER;
         const repoUrl = process.env.GITHUB_REPO;
@@ -74,7 +78,7 @@ export async function POST(req: Request) {
         return new Response(readableStream, {
             headers: {
                 "Content-Type": "application/zip",
-                "Content-Disposition": "attachment; filename=project-template.zip",
+                "Content-Disposition": `attachment; filename=${body.answers["project-name"]}.zip`,
             },
         });
     } catch (error) {

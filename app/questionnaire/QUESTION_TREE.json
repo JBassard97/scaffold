@@ -30,16 +30,35 @@
         "label": "Yes",
         "value": "framework",
         "tag": "Frontend Framework",
-        "next": "frontend-framework"
+        "next": "frontend-use-vite"
       },
       {
         "label": "No",
         "value": "vanilla",
         "tag": "Vanilla",
-        "next": "frontend-language"
+        "next": "project-name"
       }
     ],
     "previous": "start"
+  },
+
+  "frontend-use-vite": {
+    "question": "Would you like to use Vite?",
+    "options": [
+      {
+        "label": "Yes",
+        "value": true,
+        "tag": "Vite",
+        "next": "frontend-framework"
+      },
+      {
+        "label": "No",
+        "value": false,
+        "tag": "No Vite",
+        "next": "project-name"
+      }
+    ],
+    "previous": "frontend"
   },
 
   "frontend-framework": {
@@ -112,173 +131,9 @@
         "value": "javascript",
         "tag": "JavaScript",
         "next": "project-name"
-      },
-      {
-        "label": "Official Vue Starter",
-        "value": "officialvuestarter",
-        "tag": "Official Vue Starter",
-        "next": "vue-official-starter-add-typescript"
       }
     ],
     "previous": "frontend-framework"
-  },
-  "vue-official-starter-add-typescript": {
-    "question": "Would you like to add TypeScript?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "TypeScript",
-        "next": "vue-official-starter-jsx-support"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "tag": "JavaScript",
-        "next": "vue-official-starter-jsx-support"
-      }
-    ],
-    "previous": "vue-variant"
-  },
-  "vue-official-starter-jsx-support": {
-    "question": "Would you like to add JSX support?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "JSX Support",
-        "next": "vue-official-starter-add-vue-router"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "vue-official-starter-add-vue-router"
-      }
-    ],
-    "previous": "vue-official-starter-add-typescript"
-  },
-  "vue-official-starter-add-vue-router": {
-    "question": "Would you like to add Vue Router for Single Page Application (SPA) development?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "Vue Router",
-        "next": "vue-official-starter-add-pinia"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "vue-official-starter-add-pinia"
-      }
-    ],
-    "previous": "vue-official-starter-jsx-support"
-  },
-  "vue-official-starter-add-pinia": {
-    "question": "Would you like to add Pinia for state management?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": ["Pinia", "State Management"],
-        "next": "vue-official-starter-add-vitest"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "vue-official-starter-add-vitest"
-      }
-    ],
-    "previous": "vue-official-starter-add-vue-router"
-  },
-  "vue-official-starter-add-vitest": {
-    "question": "Would you like to add Vitest for Unit Testing?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": ["Vitest", "Unit Testing"],
-        "next": "vue-official-starter-e2e-testing"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "vue-official-starter-e2e-testing"
-      }
-    ],
-    "previous": "vue-official-starter-add-pinia"
-  },
-  "vue-official-starter-e2e-testing": {
-    "question": "Would you like to add an End-to-End Testing Solution?",
-    "options": [
-      {
-        "label": "No",
-        "value": false,
-        "next": "vue-official-starter-add-eslint"
-      },
-      {
-        "label": "Cypress",
-        "description": "Also supports unit testing with Cypress Component Testing",
-        "value": "cypress",
-        "tag": ["Cypress", "End-to-End Testing", "Component Testing"],
-        "next": "vue-official-starter-add-eslint"
-      },
-      {
-        "label": "Nightwatch",
-        "description": "Also supports unit testing with Nightwatch Component Testing",
-        "value": "nightwatch",
-        "tag": ["Nightwatch", "End-to-End Testing", "Component Testing"],
-
-        "next": "vue-official-starter-add-eslint"
-      },
-      {
-        "label": "Playwright",
-        "value": "playwright",
-        "tag": ["Playwright", "End-to-End Testing"],
-        "next": "vue-official-starter-add-eslint"
-      }
-    ],
-    "previous": "vue-official-starter-add-vitest"
-  },
-  "vue-official-starter-add-eslint": {
-    "question": "Would you like to add ESLint for linting?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "ESLint",
-        "next": "vue-official-starter-add-prettier"
-      },
-      {
-        "label": "Yes + Add Oxlint",
-        "value": "yes+oxlint",
-        "tag": ["ESLint", "Oxlint"],
-        "next": "vue-official-starter-add-prettier"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "project-name"
-      }
-    ],
-    "previous": "vue-official-starter-e2e-testing"
-  },
-  "vue-official-starter-add-prettier": {
-    "question": "Would you like to add Prettier for code formatting?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "Prettier",
-        "next": "project-name"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "project-name"
-      }
-    ],
-    "previous": "vue-official-starter-add-eslint"
   },
   "svelte-variant": {
     "question": "Select a variant of Svelte",
@@ -571,171 +426,9 @@
         "value": "javascript",
         "tag": "JavaScript",
         "next": "project-name"
-      },
-      {
-        "label": "Official Vue Starter",
-        "value": "officialvuestarter",
-        "tag": "Official Vue Starter",
-        "next": "full-stack-vue-official-starter-add-typescript"
       }
     ],
     "previous": "full-stack-separate-frontend-framework"
-  },
-
-  "full-stack-vue-official-starter-add-typescript": {
-    "question": "Would you like to add TypeScript?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "TypeScript",
-        "next": "full-stack-vue-official-starter-jsx-support"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "tag": "JavaScript",
-        "next": "full-stack-vue-official-starter-jsx-support"
-      }
-    ],
-    "previous": "full-stack-vue-variant"
-  },
-
-  "full-stack-vue-official-starter-jsx-support": {
-    "question": "Would you like to add JSX support?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "JSX Support",
-        "next": "full-stack-vue-official-starter-add-vue-router"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "full-stack-vue-official-starter-add-vue-router"
-      }
-    ],
-    "previous": "full-stack-vue-official-starter-add-typescript"
-  },
-
-  "full-stack-vue-official-starter-add-vue-router": {
-    "question": "Would you like to add Vue Router for Single Page Application (SPA) development?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "Vue Router",
-        "next": "full-stack-vue-official-starter-add-pinia"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "full-stack-vue-official-starter-add-pinia"
-      }
-    ],
-    "previous": "full-stack-vue-official-starter-jsx-support"
-  },
-
-  "full-stack-vue-official-starter-add-pinia": {
-    "question": "Would you like to add Pinia for state management?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": ["Pinia", "State Management"],
-        "next": "full-stack-vue-official-starter-add-vitest"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "full-stack-vue-official-starter-add-vitest"
-      }
-    ],
-    "previous": "full-stack-vue-official-starter-add-vue-router"
-  },
-
-  "full-stack-vue-official-starter-add-vitest": {
-    "question": "Would you like to add Vitest for Unit Testing?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": ["Vitest", "Unit Testing"],
-        "next": "full-stack-vue-official-starter-e2e-testing"
-      },
-      {
-        "label": "No",
-        "value": false,
-        "next": "full-stack-vue-official-starter-e2e-testing"
-      }
-    ],
-    "previous": "full-stack-vue-official-starter-add-pinia"
-  },
-
-  "full-stack-vue-official-starter-e2e-testing": {
-    "question": "Would you like to add an End-to-End Testing Solution?",
-    "options": [
-      {
-        "label": "No",
-        "value": false,
-        "next": "full-stack-vue-official-starter-add-eslint"
-      },
-      {
-        "label": "Cypress",
-        "description": "Also supports unit testing with Cypress Component Testing",
-        "value": "cypress",
-        "tag": ["Cypress", "End-to-End Testing", "Component Testing"],
-        "next": "full-stack-vue-official-starter-add-eslint"
-      },
-      {
-        "label": "Nightwatch",
-        "description": "Also supports unit testing with Nightwatch Component Testing",
-        "value": "nightwatch",
-        "tag": ["Nightwatch", "End-to-End Testing", "Component Testing"],
-        "next": "full-stack-vue-official-starter-add-eslint"
-      },
-      {
-        "label": "Playwright",
-        "value": "playwright",
-        "tag": ["Playwright", "End-to-End Testing"],
-        "next": "full-stack-vue-official-starter-add-eslint"
-      }
-    ],
-    "previous": "full-stack-vue-official-starter-add-vitest"
-  },
-
-  "full-stack-vue-official-starter-add-eslint": {
-    "question": "Would you like to add ESLint for linting?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "ESLint",
-        "next": "full-stack-vue-official-starter-add-prettier"
-      },
-      {
-        "label": "Yes + Add Oxlint",
-        "value": "yes+oxlint",
-        "tag": ["ESLint", "Oxlint"],
-        "next": "full-stack-vue-official-starter-add-prettier"
-      },
-      { "label": "No", "value": false, "next": "project-name" }
-    ],
-    "previous": "full-stack-vue-official-starter-e2e-testing"
-  },
-  "full-stack-vue-official-starter-add-prettier": {
-    "question": "Would you like to add Prettier for code formatting?",
-    "options": [
-      {
-        "label": "Yes",
-        "value": true,
-        "tag": "Prettier",
-        "next": "project-name"
-      },
-      { "label": "No", "value": false, "next": "project-name" }
-    ],
-    "previous": "full-stack-vue-official-starter-add-eslint"
   },
   "full-stack-svelte-variant": {
     "question": "Select a variant of Svelte",
@@ -818,7 +511,7 @@
       {
         "label": "Java",
         "value": "java",
-        "tag":"Java",
+        "tag": "Java",
         "next": "full-stack-separate-backend-java-framework"
       }
     ],
@@ -831,7 +524,7 @@
       {
         "label": "Express",
         "value": "express",
-        "tag":"Express",
+        "tag": "Express",
         "next": "full-stack-separate-frontend"
       }
     ],
