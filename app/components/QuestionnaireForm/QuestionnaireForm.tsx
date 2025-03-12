@@ -11,9 +11,9 @@ interface QuestionnaireFormProps {
     answerValue: string,
     nextKey: QuestionKey
   ) => void;
-  onAddTag?: (tag: string) => void;
+  onAddTag?: (tags: string[]) => void;
+  setRecentTags: React.Dispatch<React.SetStateAction<string[]>>; // Accept setRecentTags
   downloadUrl?: string | null;
-  setProjectName: (name: string) => void;
 }
 
 const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
@@ -21,47 +21,47 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
   currentQuestionKey,
   onNextQuestion,
   onAddTag,
+  setRecentTags,
   downloadUrl,
 }) => {
   const currentQuestion = questionTree[currentQuestionKey];
 
-  const [projectName, setProjectName] = useState("");
-
-  const isValidProjectName = (name: string) => /^[A-Za-z0-9 -]+$/.test(name); // Allows letters, numbers, spaces, and dashes
+  const isValidProjectName = (name: string) => /^[A-Za-z0-9 -]+$/.test(name);
 
   const sanitizeProjectName = (name: string) =>
     name
-      .trim() // Remove leading and trailing spaces
-      .replace(/\s+/g, "-") // Replace spaces with dashes
-      .replace(/[^a-z0-9-]/gi, "") // Remove invalid characters
-      .toLowerCase(); // Convert to lowercase
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/gi, "")
+      .toLowerCase();
 
   const handleProjectNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProjectName(sanitizeProjectName(e.target.value));
+    const sanitizedName = sanitizeProjectName(e.target.value);
+    onNextQuestion(currentQuestionKey, sanitizedName, "done");
   };
 
   const handleComplete = () => {
-    if (!isValidProjectName(projectName)) {
+    if (!isValidProjectName(currentQuestionKey)) {
       alert(
         "Invalid project name! Use only lowercase letters, numbers, and dashes (-)."
       );
       return;
     }
-    setProjectName(projectName);
-    onNextQuestion(currentQuestionKey, projectName, "done");
+    onNextQuestion(currentQuestionKey, currentQuestionKey, "done");
   };
 
   const handleOptionSelect = (option: any) => {
-    // Ensure onAddTag is called with all tags if available
-    if (option.tag && onAddTag) {
-      if (Array.isArray(option.tag)) {
-        option.tag.forEach((tag: string) => onAddTag(tag)); // Add each tag separately
-      } else {
-        onAddTag(option.tag);
-      }
+    // Add tags associated with the selected option
+    if (option["tag"]) {
+      const tagsToAdd = Array.isArray(option.tag) ? option.tag : [option.tag];
+
+      // Add tagsToAdd as a single array element to recentTags
+      setRecentTags((prev) => [...prev, tagsToAdd]); // Now tagsToAdd is added as a whole array
+
+      // The original onAddTag behavior remains unchanged
+      onAddTag && onAddTag(tagsToAdd);
     }
 
-    // Proceed with the existing flow
     onNextQuestion(currentQuestionKey, option.value, option.next);
   };
 
@@ -75,7 +75,7 @@ const QuestionnaireForm: React.FC<QuestionnaireFormProps> = ({
         <div>
           <input
             type="text"
-            value={projectName}
+            value={currentQuestionKey}
             onChange={handleProjectNameChange}
             placeholder="Enter project name (e.g., my-app)"
           />

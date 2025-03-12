@@ -4,31 +4,27 @@ import { useState, useEffect } from "react";
 import QUESTION_TREE from "./QUESTION_TREE.json";
 import QuestionnaireForm from "../components/QuestionnaireForm/QuestionnaireForm";
 import { TagDisplay } from "../components/TagDisplay/TagDisplay";
-import { QuestionKey, QuestionTree } from "@/types";
+import { QuestionKey } from "@/types";
 
 const QuestionnairePage = () => {
   const questionTree: any = QUESTION_TREE;
   const [currentQuestionKey, setCurrentQuestionKey] =
     useState<QuestionKey>("start");
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [tags, setTags] = useState<string[]>([]);
-  const [questionTags, setQuestionTags] = useState<Record<string, string[]>>(
-    {}
-  );
+  const [tags, setTags] = useState<string[]>([]); // Single state to hold all tags
+  const [recentTags, setRecentTags] = useState<string[]>([]); // Move recentTags here
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
-  // 🔹 Move projectName state here so it can be managed globally
-  const [projectName, setProjectName] = useState("");
+  useEffect(() => {
+    console.log("Answers:", answers);
+    console.log("Tags:", tags);
+    console.log("Recent Tags:", recentTags);
+  }, [answers, tags, recentTags]);
 
-  const handleAddTag = (tag: string) => {
-    if (!tags.includes(tag)) {
-      setTags((prevTags) => [...prevTags, tag]);
-      setQuestionTags((prev) => ({
-        ...prev,
-        [currentQuestionKey]: [...(prev[currentQuestionKey] || []), tag],
-      }));
-    }
+  // Handle adding new tags
+  const handleAddTag = (tagsToAdd: string[]) => {
+    setTags((prevTags) => [...prevTags, ...tagsToAdd]);
   };
 
   const handleNextQuestion = (
@@ -74,9 +70,6 @@ const QuestionnairePage = () => {
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       setDownloadUrl(url);
-
-      // Ensure project name is correctly set
-      setProjectName(answers["project-name"] || "project");
     } catch (error) {
       console.error("Download failed:", error);
     } finally {
@@ -88,10 +81,39 @@ const QuestionnairePage = () => {
     setCurrentQuestionKey("start");
     setAnswers({});
     setTags([]);
-    setQuestionTags({});
+    setRecentTags([]); // Reset recentTags
     setDownloadUrl(null);
     setIsDownloading(false);
-    setProjectName(""); // 🔹 Reset project name
+  };
+
+  const handleGoBack = () => {
+    const currentQuestion = questionTree[currentQuestionKey];
+    if (!currentQuestion?.previous) return;
+
+    const previousKey = currentQuestion.previous;
+
+    // Remove current question from answers
+    setAnswers((prev) => {
+      const updated = { ...prev };
+      delete updated[currentQuestionKey];
+      return updated;
+    });
+
+    // Get the most recent tags array (the last item in recentTags)
+    if (recentTags.length > 0) {
+      // Get the last array in recentTags
+      const lastTagsArray = recentTags[recentTags.length - 1];
+
+      // Remove these tags from the tags state
+      setTags((prevTags) =>
+        prevTags.filter((tag) => !lastTagsArray.includes(tag))
+      );
+
+      // Remove the last array from recentTags
+      setRecentTags((prev) => prev.slice(0, -1));
+    }
+
+    setCurrentQuestionKey(previousKey);
   };
 
   return (
@@ -102,20 +124,21 @@ const QuestionnairePage = () => {
 
       <button onClick={handleReset}>Start Over</button>
 
+      {questionTree[currentQuestionKey]?.previous && (
+        <button onClick={handleGoBack}>⬅️ Go Back</button>
+      )}
+
       <QuestionnaireForm
         questionTree={questionTree}
         currentQuestionKey={currentQuestionKey}
         onNextQuestion={handleNextQuestion}
         onAddTag={handleAddTag}
+        setRecentTags={setRecentTags} // Pass the function to child component
         downloadUrl={downloadUrl}
-        setProjectName={setProjectName} // 🔹 Pass setProjectName to update it
       />
 
       {downloadUrl && (
-        <a
-          href={downloadUrl}
-          download={`${answers["project-name"] || "project"}.zip`}
-        >
+        <a href={downloadUrl} download="project.zip">
           <button disabled={isDownloading}>
             {isDownloading ? "Downloading..." : "Download Project Files"}
           </button>

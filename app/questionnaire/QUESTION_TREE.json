@@ -48,7 +48,7 @@
       {
         "label": "Yes",
         "value": true,
-        "tag": "Vite",
+        "tag": ["Vite", "Development Server"],
         "next": "frontend-framework"
       },
       {
@@ -135,6 +135,7 @@
     ],
     "previous": "frontend-framework"
   },
+
   "svelte-variant": {
     "question": "Select a variant of Svelte",
     "options": [

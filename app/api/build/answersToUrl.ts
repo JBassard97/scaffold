@@ -40,6 +40,19 @@ const answersToUrl = async (answers: any) => {
                         url += "/typescript"
                     }
                 }
+
+                if (answers["frontend-framework"] === "svelte") {
+                    url += "/svelte"
+
+                    if (answers["svelte-variant"] === "javascript") {
+                        url += "/javascript"
+                    }
+
+                    if (answers["svelte-variant"] === "typescript") {
+                        url += "/typescript"
+                    }
+                }
+
             } else {
                 url += "/scaffold"
             }
